@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="mis_financial_reports.MisReportWidget" t-inherit="mis_builder.MisReportWidget" t-inherit-mode="extension">
+        <xpath expr="//tr[@t-foreach='state.mis_report_data.body']" position="attributes">
+            <attribute name="t-att-class">row.css_class</attribute>
+        </xpath>
+        <xpath expr="//td[@t-foreach='row.cells']" position="attributes">
+            <attribute name="t-att-class">cell.css_class + ' mis_builder_amount oe_mis_builder_dropdown'</attribute>
+        </xpath>
+    </t>
+</templates>

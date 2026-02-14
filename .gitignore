@@ -1,0 +1,12 @@
+# Odoo
+*.pyc
+*.pyo
+__pycache__/
+.DS_Store
+.idea/
+.vscode/
+*.log
+.env
+odoo.conf
+filestore/
+sessions/

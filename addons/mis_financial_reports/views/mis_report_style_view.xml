@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mis_report_style_view_form_inherit" model="ir.ui.view">
+        <field name="name">mis.report.style.view.form.inherit</field>
+        <field name="model">mis.report.style</field>
+        <field name="inherit_id" ref="mis_builder.mis_report_style_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="css_class" placeholder="e.g. mis_enterprise_header" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

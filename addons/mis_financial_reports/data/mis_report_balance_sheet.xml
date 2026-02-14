@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Balance Sheet (Neraca) - Indonesian Chart of Accounts -->
+<odoo noupdate="0">
+    <!-- ============================================ -->
+    <!-- Balance Sheet Report Template                -->
+    <!-- ============================================ -->
+    <record id="mis_report_balance_sheet" model="mis.report">
+        <field name="name">Balance Sheet (Neraca)</field>
+    </record>
+
+    <!-- ===== ASSETS ===== -->
+    <!-- Current Assets -->
+    <record id="bs_kpi_cash" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_balance_sheet" />
+        <field name="name">cash_bank</field>
+        <field name="description">Cash &amp; Bank</field>
+        <field name="style_id" ref="style_mis_report_kpi_parent" />
+        <field name="auto_expand_accounts">True</field>
+        <field name="auto_expand_accounts_style_id" ref="style_mis_report_detail" />
+        <field name="sequence">10</field>
+    </record>
+    <record id="bs_kpi_cash_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="bs_kpi_cash" />
+        <field name="name">bale[1111%,1112%]</field>
+    </record>
+
+    <record id="bs_kpi_receivable" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_balance_sheet" />
+        <field name="name">receivable</field>
+        <field name="description">Receivables</field>
+        <field name="style_id" ref="style_mis_report_kpi_parent" />
+        <field name="auto_expand_accounts">True</field>
+        <field name="auto_expand_accounts_style_id" ref="style_mis_report_detail" />
+        <field name="sequence">20</field>
+    </record>
+    <record id="bs_kpi_receivable_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="bs_kpi_receivable" />
+        <field name="name">bale[112%]</field>
+    </record>
+
+    <record id="bs_kpi_inventory" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_balance_sheet" />
+        <field name="name">inventory</field>
+        <field name="description">Inventory</field>
+        <field name="style_id" ref="style_mis_report_kpi_parent" />
+        <field name="auto_expand_accounts">True</field>
+        <field name="auto_expand_accounts_style_id" ref="style_mis_report_detail" />
+        <field name="sequence">30</field>
+    </record>
+    <record id="bs_kpi_inventory_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="bs_kpi_inventory" />
+        <field name="name">bale[113%]</field>
+    </record>
+
+    <record id="bs_kpi_prepayments" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_balance_sheet" />
+        <field name="name">prepayments</field>
+        <field name="description">Prepayments &amp; Other Current Assets</field>
+        <field name="style_id" ref="style_mis_report_kpi_parent" />
+        <field name="auto_expand_accounts">True</field>
+        <field name="auto_expand_accounts_style_id" ref="style_mis_report_detail" />
+        <field name="sequence">40</field>
+    </record>
+    <record id="bs_kpi_prepayments_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="bs_kpi_prepayments" />
+        <field name="name">bale[114%,115%,116%,117%,118%,119%]</field>
+    </record>
+
+    <record id="bs_kpi_current_assets" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_balance_sheet" />
+        <field name="name">current_assets</field>
+        <field name="description">Total Current Assets</field>
+        <field name="style_id" ref="style_mis_report_kpi_total" />
+        <field name="expression">cash_bank + receivable + inventory + prepayments</field>
+        <field name="sequence">49</field>
+    </record>
+
+    <!-- Fixed Assets -->
+    <record id="bs_kpi_fixed_assets" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_balance_sheet" />
+        <field name="name">fixed_assets</field>
+        <field name="description">Fixed Assets (net of depreciation)</field>
+        <field name="style_id" ref="style_mis_report_kpi_parent" />
+        <field name="auto_expand_accounts">True</field>
+        <field name="auto_expand_accounts_style_id" ref="style_mis_report_detail" />
+        <field name="sequence">50</field>
+    </record>
+    <record id="bs_kpi_fixed_assets_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="bs_kpi_fixed_assets" />
+        <field name="name">bale[12%,13%,14%,15%,16%,17%,18%,19%]</field>
+    </record>
+
+    <record id="bs_kpi_total_assets" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_balance_sheet" />
+        <field name="name">total_assets</field>
+        <field name="description">TOTAL ASSETS</field>
+        <field name="style_id" ref="style_mis_report_kpi_total" />
+        <field name="expression">current_assets + fixed_assets</field>
+        <field name="sequence">59</field>
+    </record>
+
+    <!-- ===== LIABILITIES ===== -->
+    <record id="bs_kpi_payable" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_balance_sheet" />
+        <field name="name">payable</field>
+        <field name="description">Payables</field>
+        <field name="style_id" ref="style_mis_report_kpi_parent" />
+        <field name="auto_expand_accounts">True</field>
+        <field name="auto_expand_accounts_style_id" ref="style_mis_report_detail" />
+        <field name="sequence">60</field>
+    </record>
+    <record id="bs_kpi_payable_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="bs_kpi_payable" />
+        <field name="name">bale[21%]</field>
+    </record>
+
+    <record id="bs_kpi_other_liabilities" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_balance_sheet" />
+        <field name="name">other_liabilities</field>
+        <field name="description">Other Liabilities</field>
+        <field name="style_id" ref="style_mis_report_kpi_parent" />
+        <field name="auto_expand_accounts">True</field>
+        <field name="auto_expand_accounts_style_id" ref="style_mis_report_detail" />
+        <field name="sequence">70</field>
+    </record>
+    <record id="bs_kpi_other_liabilities_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="bs_kpi_other_liabilities" />
+        <field name="name">bale[22%,23%,24%,25%,26%,27%,28%,29%]</field>
+    </record>
+
+    <record id="bs_kpi_total_liabilities" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_balance_sheet" />
+        <field name="name">total_liabilities</field>
+        <field name="description">Total Liabilities</field>
+        <field name="style_id" ref="style_mis_report_kpi_total" />
+        <field name="expression">payable + other_liabilities</field>
+        <field name="sequence">79</field>
+    </record>
+
+    <!-- ===== EQUITY ===== -->
+    <record id="bs_kpi_equity" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_balance_sheet" />
+        <field name="name">equity</field>
+        <field name="description">Equity</field>
+        <field name="style_id" ref="style_mis_report_kpi_parent" />
+        <field name="auto_expand_accounts">True</field>
+        <field name="auto_expand_accounts_style_id" ref="style_mis_report_detail" />
+        <field name="sequence">80</field>
+    </record>
+    <record id="bs_kpi_equity_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="bs_kpi_equity" />
+        <field name="name">bale[3%]</field>
+    </record>
+
+    <record id="bs_kpi_total_liab_equity" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_balance_sheet" />
+        <field name="name">total_liab_equity</field>
+        <field name="description">TOTAL LIABILITIES &amp; EQUITY</field>
+        <field name="style_id" ref="style_mis_report_kpi_total" />
+        <field name="expression">total_liabilities + equity</field>
+        <field name="sequence">89</field>
+    </record>
+</odoo>

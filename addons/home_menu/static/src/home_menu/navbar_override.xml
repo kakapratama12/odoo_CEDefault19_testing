@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!--
+        Override the desktop AppsMenu to replace the Dropdown with a direct button.
+        The original web.NavBar.AppsMenu template structure:
+          <t t-if="env.isSmall">  (mobile: sidebar menu)
+          <t t-else="">           (desktop: Dropdown menu)
+        We replace the CONTENT of the desktop t-else block.
+    -->
+    <t t-name="web.NavBar.AppsMenu" t-inherit="web.NavBar.AppsMenu" t-inherit-mode="extension">
+        <!-- Replace the desktop Dropdown with a simple clickable button -->
+        <xpath expr="//div[hasclass('o_navbar_apps_menu')]/Dropdown" position="replace">
+            <button class="btn o_home_menu_btn d-flex align-items-center justify-content-center p-0" data-hotkey="h" title="Home Menu" t-on-click="onHomeMenuClick">
+                <div class="o_home_menu_toggle_content position-relative d-flex align-items-center justify-content-center">
+                    <!-- Icon State: Current App Icon if available, else 9-dot -->
+                    <span class="o_module_icon_wrapper d-flex align-items-center justify-content-center">
+                        <t t-if="currentApp and currentApp.webIconData">
+                            <img class="o_navbar_app_icon" t-attf-src="{{currentApp.webIconData}}"/>
+                        </t>
+                        <t t-else="">
+                            <i class="oi oi-apps fs-4"/>
+                        </t>
+                    </span>
+                    <!-- Hover State: Back Arrow -->
+                    <i class="o_back_icon fa fa-chevron-left fs-4 position-absolute top-50 start-50 translate-middle"/>
+                </div>
+            </button>
+        </xpath>
+    </t>
+
+</templates>

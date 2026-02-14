@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Cash Flow Statement (Arus Kas) - Indonesian Chart of Accounts -->
+<odoo noupdate="0">
+    <!-- ============================================ -->
+    <!-- Cash Flow Report Template                    -->
+    <!-- ============================================ -->
+    <record id="mis_report_cash_flow" model="mis.report">
+        <field name="name">Cash Flow Statement (Arus Kas)</field>
+    </record>
+
+    <!-- ===== OPERATING ACTIVITIES ===== -->
+    <record id="cf_kpi_net_income" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_cash_flow" />
+        <field name="name">net_income</field>
+        <field name="description">Net Income</field>
+        <field name="style_id" ref="style_mis_report_accounting" />
+        <field name="sequence">10</field>
+    </record>
+    <record id="cf_kpi_net_income_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="cf_kpi_net_income" />
+        <field name="name">-balp[4%,8%] + balp[5%,6%,7%,9%]</field>
+    </record>
+
+    <record id="cf_kpi_depreciation" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_cash_flow" />
+        <field name="name">depreciation</field>
+        <field name="description">Depreciation &amp; Amortization</field>
+        <field name="style_id" ref="style_mis_report_kpi_parent" />
+        <field name="auto_expand_accounts">True</field>
+        <field name="auto_expand_accounts_style_id" ref="style_mis_report_detail" />
+        <field name="sequence">20</field>
+    </record>
+    <record id="cf_kpi_depreciation_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="cf_kpi_depreciation" />
+        <field name="name">balp[671%]</field>
+    </record>
+
+    <record id="cf_kpi_receivable_chg" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_cash_flow" />
+        <field name="name">receivable_chg</field>
+        <field name="description">Change in Receivables</field>
+        <field name="style_id" ref="style_mis_report_accounting" />
+        <field name="sequence">30</field>
+    </record>
+    <record id="cf_kpi_receivable_chg_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="cf_kpi_receivable_chg" />
+        <field name="name">-debp[112%] + crdp[112%]</field>
+    </record>
+
+    <record id="cf_kpi_inventory_chg" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_cash_flow" />
+        <field name="name">inventory_chg</field>
+        <field name="description">Change in Inventory</field>
+        <field name="style_id" ref="style_mis_report_accounting" />
+        <field name="sequence">40</field>
+    </record>
+    <record id="cf_kpi_inventory_chg_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="cf_kpi_inventory_chg" />
+        <field name="name">-debp[113%] + crdp[113%]</field>
+    </record>
+
+    <record id="cf_kpi_payable_chg" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_cash_flow" />
+        <field name="name">payable_chg</field>
+        <field name="description">Change in Payables</field>
+        <field name="style_id" ref="style_mis_report_accounting" />
+        <field name="sequence">50</field>
+    </record>
+    <record id="cf_kpi_payable_chg_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="cf_kpi_payable_chg" />
+        <field name="name">-debp[21%] + crdp[21%]</field>
+    </record>
+
+    <record id="cf_kpi_other_wc" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_cash_flow" />
+        <field name="name">other_wc</field>
+        <field name="description">Other Working Capital Changes</field>
+        <field name="style_id" ref="style_mis_report_accounting" />
+        <field name="sequence">55</field>
+    </record>
+    <record id="cf_kpi_other_wc_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="cf_kpi_other_wc" />
+        <field name="name">-debp[114%,115%,22%,23%,24%,25%,26%,27%,28%,29%] + crdp[114%,115%,22%,23%,24%,25%,26%,27%,28%,29%]</field>
+    </record>
+
+    <record id="cf_kpi_operating" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_cash_flow" />
+        <field name="name">operating_cf</field>
+        <field name="description">Cash from Operating Activities</field>
+        <field name="style_id" ref="style_mis_report_kpi_total" />
+        <field name="expression">net_income + depreciation + receivable_chg + inventory_chg + payable_chg + other_wc</field>
+        <field name="sequence">59</field>
+    </record>
+
+    <!-- ===== INVESTING ACTIVITIES ===== -->
+    <record id="cf_kpi_fixed_assets" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_cash_flow" />
+        <field name="name">investing_fixed</field>
+        <field name="description">Purchase/Sale of Fixed Assets</field>
+        <field name="style_id" ref="style_mis_report_accounting" />
+        <field name="sequence">60</field>
+    </record>
+    <record id="cf_kpi_fixed_assets_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="cf_kpi_fixed_assets" />
+        <field name="name">-debp[12%,13%,14%,15%,16%,17%,18%,19%] + crdp[12%,13%,14%,15%,16%,17%,18%,19%]</field>
+    </record>
+
+    <record id="cf_kpi_investing" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_cash_flow" />
+        <field name="name">investing_cf</field>
+        <field name="description">Cash from Investing Activities</field>
+        <field name="style_id" ref="style_mis_report_kpi_total" />
+        <field name="expression">investing_fixed</field>
+        <field name="sequence">69</field>
+    </record>
+
+    <!-- ===== FINANCING ACTIVITIES ===== -->
+    <record id="cf_kpi_equity_chg" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_cash_flow" />
+        <field name="name">equity_chg</field>
+        <field name="description">Changes in Equity</field>
+        <field name="style_id" ref="style_mis_report_accounting" />
+        <field name="sequence">70</field>
+    </record>
+    <record id="cf_kpi_equity_chg_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="cf_kpi_equity_chg" />
+        <field name="name">-debp[3%] + crdp[3%]</field>
+    </record>
+
+    <record id="cf_kpi_financing" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_cash_flow" />
+        <field name="name">financing_cf</field>
+        <field name="description">Cash from Financing Activities</field>
+        <field name="style_id" ref="style_mis_report_kpi_total" />
+        <field name="expression">equity_chg</field>
+        <field name="sequence">79</field>
+    </record>
+
+    <!-- ===== TOTALS ===== -->
+    <record id="cf_kpi_net_change" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_cash_flow" />
+        <field name="name">net_change</field>
+        <field name="description">NET CHANGE IN CASH</field>
+        <field name="style_id" ref="style_mis_report_kpi_total" />
+        <field name="expression">operating_cf + investing_cf + financing_cf</field>
+        <field name="sequence">90</field>
+    </record>
+
+    <record id="cf_kpi_cash_begin" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_cash_flow" />
+        <field name="name">cash_begin</field>
+        <field name="description">Cash - Beginning of Period</field>
+        <field name="style_id" ref="style_mis_report_accounting" />
+        <field name="sequence">91</field>
+    </record>
+    <record id="cf_kpi_cash_begin_expr" model="mis.report.kpi.expression">
+        <field name="kpi_id" ref="cf_kpi_cash_begin" />
+        <field name="name">bali[1111%,1112%]</field>
+    </record>
+
+    <record id="cf_kpi_cash_end" model="mis.report.kpi">
+        <field name="report_id" ref="mis_report_cash_flow" />
+        <field name="name">cash_end</field>
+        <field name="description">CASH - END OF PERIOD</field>
+        <field name="style_id" ref="style_mis_report_kpi_total" />
+        <field name="expression">cash_begin + net_change</field>
+        <field name="sequence">99</field>
+    </record>
+</odoo>

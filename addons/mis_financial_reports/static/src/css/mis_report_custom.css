@@ -1,0 +1,79 @@
+/* 
+   Robust fix for MIS Report Preview width.
+   The container o_form_sheet_bg uses flex column with align-items: center, causing content to shrink.
+   The content is rendered as divs (css table layout).
+   
+   Strategy:
+   1. Disable flex centering on container (use block).
+   2. Force direct children to be 95% wide and centered via margins.
+   3. Ensure internal table structures take full available width.
+*/
+
+.oe_mis_builder_report_wide_sheet {
+    display: block !important;
+    width: 100% !important;
+    padding-top: 20px;
+    /* Add some breathing room at top */
+}
+
+/* Force direct children (the report wrapper, buttons, etc) to be wide */
+.oe_mis_builder_report_wide_sheet>* {
+    width: 70% !important;
+    max-width: 70% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Ensure deep structures expand */
+.oe_mis_builder_report_wide_sheet .page,
+.oe_mis_builder_report_wide_sheet .mis_table,
+.oe_mis_builder_report_wide_sheet .oe_mis_builder_content,
+.oe_mis_builder_report_wide_sheet .o_list_renderer table {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Enterprise-like Styling */
+.mis_enterprise_header {
+    background-color: #f0f0f0 !important;
+    font-weight: bold;
+    color: #444;
+}
+
+.mis_enterprise_header td {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.mis_enterprise_total {
+    border-top: 2px solid #555 !important;
+    font-weight: bold;
+    color: #222;
+}
+
+.mis_enterprise_total td {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+}
+
+.mis_enterprise_detail {
+    /* Optional: any specific detail styling */
+}
+
+/* Ensure indentation is respected but clean */
+.mis_enterprise_detail .mis_cell.mis_rowlabel {
+    padding-left: 20px;
+}
+
+/* Generic Subtotal Separation (Smart Styling) */
+.mis_subtotal_line {
+    /* Subtle border + Background Fill */
+    border-bottom: 1px solid #ddd !important;
+    background-color: #dcdcdc !important;
+    font-weight: bold;
+}
+
+/* Visual break (spacing) after subtotal lines */
+.mis_subtotal_line+tr>td {
+    padding-top: 24px !important;
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="home_menu.HomeMenu">
+        <div class="o_home_menu d-flex flex-column align-items-center">
+            <div class="o_home_menu_search">
+                <div class="o_home_menu_search_box">
+                    <i class="fa fa-search o_home_menu_search_icon"/>
+                    <input
+                        type="text"
+                        class="o_home_menu_search_input"
+                        placeholder="Search menus..."
+                        t-on-input="onSearchInput"
+                        t-on-keydown="onSearchKeydown"
+                        autofocus="autofocus"
+                    />
+                </div>
+            </div>
+
+            <div class="o_apps_grid">
+                <t t-foreach="apps" t-as="app" t-key="app.id">
+                    <a class="o_app"
+                       t-on-click.prevent="() => this.onAppClick(app)"
+                       t-att-href="'/odoo/' + (app.actionPath || 'action-' + app.actionID)"
+                       t-att-data-menu-xmlid="app.xmlid">
+                        <div class="o_app_icon_wrapper">
+                            <img t-if="app.webIconData"
+                                 class="o_app_icon"
+                                 t-att-src="app.webIconData"
+                                 t-att-alt="app.name"/>
+                            <div t-else=""
+                                 class="o_app_icon o_app_icon_placeholder">
+                                <i class="fa fa-cube"/>
+                            </div>
+                        </div>
+                        <span class="o_app_name" t-esc="app.name"/>
+                    </a>
+                </t>
+            </div>
+
+            <div t-if="apps.length === 0" class="o_home_menu_empty">
+                <i class="fa fa-search-minus"/>
+                <p>No apps found</p>
+            </div>
+        </div>
+    </t>
+
+</templates>
