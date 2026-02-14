@@ -43,8 +43,12 @@ for repo_url in "${REPOS[@]}"; do
         if [ -d "$repo_name/.git" ]; then
             echo "    Git repo exists, pulling latest..."
             git -C "$repo_name" pull origin 19.0 || echo -e "${YELLOW}    ⚠️  Pull failed or branch 19.0 not found for $repo_name${NC}"
+        elif [ -z "$(ls -A "$repo_name")" ]; then
+            echo -e "${YELLOW}    ⚠️  Directory $repo_name exists but is empty. Removing and cloning...${NC}"
+            rm -rf "$repo_name"
+            git clone --depth 1 --branch 19.0 "$repo_url" "$repo_name"
         else
-            echo -e "${YELLOW}    ⚠️  Directory $repo_name exists but is not a git repo. Skipping.${NC}"
+            echo -e "${YELLOW}    ⚠️  Directory $repo_name exists, is NOT empty, and is NOT a git repo. Skipping manually.${NC}"
         fi
     else
         echo "  Cloning $repo_name..."
